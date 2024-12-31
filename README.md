@@ -1,4 +1,4 @@
-# Wordle App
+# wörtle
 
 This is a simple Wordle-inspired web application built using Python's Flask framework. The app selects a daily word for users to guess and provides feedback on their guesses, similar to the original Wordle game from New York Times. It includes server-side logic, a SQLite database, and a basic frontend for interacting with the game.
 
@@ -6,7 +6,7 @@ This is a simple Wordle-inspired web application built using Python's Flask fram
 
 ## Features
 - Daily word selection stored in a SQLite database.
-- Six-character word guesses with feedback on correctness.
+- Five-character word guesses with feedback on correctness.
 - Server-client communication via a RESTful API.
 - Backend powered by Flask, with dependencies managed using Poetry.
 

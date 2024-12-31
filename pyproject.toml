@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "wordle"
+name = "woertle"
 version = "0.1.0"
 description = ""
 authors = ["jkoessle <mail@jonathan-koessler.de>"]

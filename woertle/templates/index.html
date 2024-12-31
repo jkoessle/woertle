@@ -31,7 +31,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(6, 40px);
+            grid-template-columns: repeat(5, 40px);
             grid-gap: 5px;
             justify-content: center;
             margin-top: 20px;
@@ -105,7 +105,7 @@
         let gameOver = false;
 
         const maxAttempts = 6;
-        const wordLength = 6;
+        const wordLength = 5;
         const gameBoard = document.getElementById('gameBoard');
         const keyboard = document.getElementById('keyboard');
         const message = document.getElementById('message');
@@ -175,7 +175,7 @@
 
         function submitGuess(guess) {
             if (guess.length !== wordLength) {
-                message.textContent = 'Please enter a 6-letter word.';
+                message.textContent = 'Please enter a 5-letter word.';
                 return;
             }
 
