@@ -1,14 +1,14 @@
-from flask import Flask, render_template, request, jsonify, Response
+import logging
+import os
+import random
+import sqlite3
 from collections import defaultdict
 from datetime import datetime
 from functools import lru_cache
 from logging import getLogger
-import random
-import os
-import sqlite3
 
 from dotenv import load_dotenv
-
+from flask import Flask, Response, jsonify, render_template, request
 
 logger = getLogger(__name__)
 app = Flask(__name__)
@@ -18,7 +18,11 @@ WORD_LENGTH = 6
 
 def load_word_list() -> list[str]:
     with open(os.getenv("WORD_LIST_PATH"), "r", encoding="utf-8") as file:
-        words = {word.strip().lower() for word in file.readlines() if len(word.strip()) == WORD_LENGTH}
+        words = {
+            word.strip().lower()
+            for word in file.readlines()
+            if len(word.strip()) == WORD_LENGTH
+        }
     return list(words)
 
 
@@ -40,7 +44,9 @@ def init_db(word_list: list[str]) -> None:
     """)
     conn.commit()
     insert_many_list = [(word, 0) for word in word_list]
-    cursor.executemany("INSERT OR IGNORE INTO words (word, used) VALUES (?,?)", insert_many_list)
+    cursor.executemany(
+        "INSERT OR IGNORE INTO words (word, used) VALUES (?,?)", insert_many_list
+    )
     conn.commit()
     conn.close()
 
@@ -117,7 +123,6 @@ def index() -> str:
 
 @app.route("/guess", methods=["POST"])
 def guess() -> Response:
-
     target_word = get_daily_word()
     words = get_all_words()
     target_word = "gewebe"
@@ -178,7 +183,7 @@ def guess() -> Response:
 
 if __name__ == "__main__":
     load_dotenv()
-    logger.setLevel(os.getenv("LOG_LEVEL", "INFO"))
+    logger.setLevel(os.getenv("LOG_LEVEL", logging.INFO))
     words = load_word_list()
     init_db(word_list=words)
-    app.run(debug=True)
+    app.run(debug=True, host="localhost", port=8080)
